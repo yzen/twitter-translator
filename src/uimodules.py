@@ -9,5 +9,9 @@ class Home(tornado.web.UIModule):
     def css_files(self):
         return ["css/home.css"]
 
-    def render(self):
-        return self.render_string("html/uimodules/module-home.html")
+    def render(self, tweets, locale):
+        return self.render_string("html/uimodules/module-home.html", tweets=tweets, locale=locale)
+
+class Tweet(tornado.web.UIModule):
+    def render(self, tweet):
+        return self.render_string("html/uimodules/module-tweet.html", tweet=tweet)
