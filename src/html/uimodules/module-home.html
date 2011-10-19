@@ -6,7 +6,7 @@
     </head>
     <body>
         <form action="search" method="post">
-            <input type="search" required="required" placeholder="{{ _("Search") }}" name="query"/>
+            <input type="search" required="required" placeholder="{{ _("Search") }}" name="query" value="{{ query }}"/>
             <input type="submit" value="{{ _("Search") }}" />
             <span class="legend">{{ _("Your current locale is ") }}<b>{{ locale }}</b></span>
         </form>

@@ -1,6 +1,7 @@
 html {
     background-color: #D7EEF2;
     height: 100%;
+    font-family: "Lucida Grande"
 }
 body, form, p, p .translate {
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -13,7 +14,7 @@ body {
     width: 80%;
     background: -moz-linear-gradient(270deg, #FCFCFC, #ECECEC) repeat scroll 0 0 transparent;
     background: -webkit-gradient(linear, left top, left bottom, from(#FCFCFC), to(#ECECEC));
-    height: 100%;
+    min-height: 100%;
 }
 form {
     margin: -9px auto 20px auto;
@@ -34,7 +35,6 @@ form input[type=search] {
     padding-left: 10%;
     float: left;
     font-size: 11px;
-    font-family: "Lucida Grande"
 }
 p {
     width: 55%;
@@ -53,6 +53,7 @@ p:last-child {
     -moz-border-radius: 0 0 6px 6px;
     border-radius: 0 0 6px 6px;
     -webkit-border-radius: 0 0 6px 6px;
+    padding-bottom: 20px;
 }
 p .translate {
     border: none;
@@ -66,4 +67,15 @@ p .translate {
 }
 p .translate:active {
     background-color: #A1B2B5;
+}
+p .lang {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    padding: 3px 10px;
+    font-size: 11px;
+    background-color: #ECECEC;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
 }

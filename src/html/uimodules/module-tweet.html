@@ -1,1 +1,1 @@
-<p>{{ tweet }}<input class="translate" type="button" value="{{ _("Translate") }}"/></p>
+<p><span class="lang">{{ tweet["iso_language_code"] }}</span><span class="text">{{ tweet["text"] }}</span><input class="translate" type="button" value="{{ _("Translate") }}"/></p>
