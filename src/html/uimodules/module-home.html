@@ -8,11 +8,11 @@
         <form action="search" method="post">
             <input type="search" required="required" placeholder="{{ _("Search") }}" name="query" value="{{ query }}"/>
             <input type="submit" value="{{ _("Search") }}" />
-            <span class="legend">{{ _("Your current locale is ") }}<b>{{ locale }}</b></span>
+            <span class="legend">{{ _("Your current language is ") }}<b>{{ lang }}</b></span>
         </form>
         <div class="tweess">
             {% for tweet in tweets %}
-                {% module Tweet(tweet) %}
+                {% module Tweet(tweet, lang) %}
             {% end %}
         </div>
     </body>
