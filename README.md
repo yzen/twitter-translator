@@ -34,7 +34,6 @@ Twitter Translate should now run on localhost:8888
 ### Configuring
 Twitter Translate has a config file located at "./src/app.conf". Config file currently contains 3 configurable options:
 
----
   - port - port number to run the server on
   - twitterUrl - Twitter url used to search based on user criteria
   - googleTranslateUrl - Google Translate url used to translate tweets
