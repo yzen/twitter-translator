@@ -10,6 +10,21 @@ import tornado.httpclient
 import tornado.escape
 import uimodules
 
+from tornado.options import define, options
+define("port", default=8888)
+
+class WebApplication(tornado.web.Application):
+    def __init__(self):
+        settings = {
+            "static_path": os.path.join(os.path.dirname(__file__), "static"),
+            "ui_modules": uimodules
+        }
+        tornado.web.Application.__init__(self, [
+            (r"/", HomeHandler),
+            (r"/search", SearchHandler),
+            (r"/translate", TranslateHandler)
+        ], **settings)
+
 class AppRequestHandler(tornado.web.RequestHandler):
     def __init__(self, application, request, **kwargs):
         tornado.web.RequestHandler.__init__(self, application, request, **kwargs)
@@ -62,20 +77,11 @@ class TranslateHandler(AppRequestHandler):
         self.write(data["responseData"])
         self.finish()
 
-settings = {
-    "static_path": os.path.join(os.path.dirname(__file__), "static"),
-    "ui_modules": uimodules
-}
-
-application = tornado.web.Application([
-    (r"/", HomeHandler),
-    (r"/search", SearchHandler),
-    (r"/translate", TranslateHandler)
-], **settings)
-
 def main():
     tornado.locale.load_translations(os.path.join(os.path.dirname(__file__), "translations"))
-    application.listen(8888)
+    tornado.options.parse_config_file(os.path.join(os.path.dirname(__file__), "app.conf"))
+    application = WebApplication()
+    application.listen(options.port)
     tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == "__main__":
