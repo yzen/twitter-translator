@@ -24,7 +24,6 @@ Manual installation: Download [tornado-2.1.1.tar.gz](http://github.com/downloads
 Automatic installation: Tornado is listed in PyPI and can be installed with pip or easy_install.
 For more information please visit: [Tornado Web Server](http://www.tornadoweb.org/).
 
-
 ### Running
 From the checkout directory for Twitter Translate, run
 
