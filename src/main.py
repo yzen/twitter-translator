@@ -22,6 +22,9 @@ class SearchHandler(tornado.web.RequestHandler):
     def __init__(self, application, request, **kwargs):
         tornado.web.RequestHandler.__init__(self, application, request, **kwargs)
         self.lang = self.locale.code[0:2]
+        
+    def get(self):
+        self.redirect("/")
 
     @tornado.web.asynchronous
     def post(self):
