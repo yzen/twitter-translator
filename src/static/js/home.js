@@ -5,13 +5,12 @@
         var tweet = $(".text", button.parent("p"));
         button.hide();
         $.ajax({
-            url: "/translate",
-            type: "POST",
-            dataType: "json",
-            data: {
+            url: "/translate?" + $.param({
                 text: tweet.html(),
                 lang: $(".lang", button.parent("p")).text()
-            },
+            }),
+            type: "GET",
+            dataType: "json",
             success: function (response) {
                 tweet.html(response.translatedText);
             },

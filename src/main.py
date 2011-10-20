@@ -103,13 +103,13 @@ class SearchHandler(AppRequestHandler):
         self.render("html/home.html", tweets=data["results"], lang=self.lang, query=data["query"])
 
 """
-    AppRequestHandler's subclass that handles POST requests to '/translate' url.
+    AppRequestHandler's subclass that handles GET requests to '/translate' url.
 """
 class TranslateHandler(AppRequestHandler):
-    """Handle POST request to '/translate' and google translate the selected tweet."""
+    """Handle GET request to '/translate' and google translate the selected tweet."""
     @tornado.web.asynchronous
-    def post(self):
-        query = urlparse.parse_qs(self.request.body)
+    def get(self):
+        query = self.request.arguments
         http = tornado.httpclient.AsyncHTTPClient()
         http.fetch(self.buildRequestUrl(options.googleTranslateUrl,
             v="1.0", q=query["text"][0], langpair=query["lang"][0] + "|" + self.lang),
