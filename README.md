@@ -8,6 +8,7 @@ Make sure python (preferably 2.6 or higher) is installed on your machine.
 
 Twitter Translate is build using Tornado web server. Below are steps to install Tornado:
 Platforms: any Unix-like platform; for best performance and scalability Linux and BSD are recommended.
+
 Manual installation: Download [tornado-2.1.1.tar.gz](http://github.com/downloads/facebook/tornado/tornado-2.1.1.tar.gz).
 
     tar xvzf tornado-2.1.1.tar.gz
@@ -20,10 +21,10 @@ For more information please visit: [Tornado Web Server](http://www.tornadoweb.or
 
 ### Running
 
-From the checkout derectory for Twitter Translate, run
+From the checkout directory for Twitter Translate, run
 
     python src/main.py
 
-or (if you can execute src/main.py) simply
+or (if you can execute ./src/main.py) simply
 
-    src/main.py
+    ./src/main.py
