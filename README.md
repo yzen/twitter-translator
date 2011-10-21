@@ -42,3 +42,12 @@ Twitter Translate has a config file located at "./src/app.conf". Config file cur
   - port - port number to run the server on
   - twitterUrl - Twitter url used to search based on user criteria
   - googleTranslateUrl - Google Translate url used to translate tweets
+  
+### Testing
+To run tests, from the checkout directory for Twitter Translate, run
+
+    python src/tests.py
+    
+or (if you can execute ./src/tests.py) simply
+
+    ./src/tests.py
