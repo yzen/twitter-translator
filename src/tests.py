@@ -17,7 +17,7 @@ class responseHTMLParser(HTMLParser):
     def handle_starttag(self, tag, attrs):
         if tag.lower() == "p": self.callback()
 
-"""Testing WebApplication class from main.py"""
+"""Integration Tests for WebApplication class from main.py"""
 class WebApplicationTest(tornado.testing.AsyncHTTPTestCase):
     """Success response code to compare to."""
     _successCode = 200
@@ -53,7 +53,7 @@ class WebApplicationTest(tornado.testing.AsyncHTTPTestCase):
     def test_SearchGETHandler(self):
         self.defaultHandler("/search")
 
-"""Testing common functionality from main.py"""
+"""Testing common utils from main.py"""
 class mainTest(unittest.TestCase):
     def setUp(self):
         self.app_dir = os.path.abspath(os.path.dirname(__file__))
@@ -64,5 +64,13 @@ class mainTest(unittest.TestCase):
         self.assertEqual(self.app_dir + "/test/some.file", getAbsolutePath("test/some.file"))
         self.assertEqual("/etc/some.file", getAbsolutePath("/etc/some.file"))
         
+"""Testing AppRequestHandler class from main.py"""
+class AppRequestHandlerTest(unittest.TestCase):
+    """getAbsolutePath from main.py that intelligently joins a number of path fragments"""
+    def test_buildRequestUrl(self):
+        self.assertEqual("some_url?q=query", AppRequestHandler.buildRequestUrl("some_url", q="query"))
+        self.assertEqual("some_url", AppRequestHandler.buildRequestUrl("some_url"))
+        self.assertEqual("some_url?q=test&lang=en&v=1.0", AppRequestHandler.buildRequestUrl("some_url", q="test", lang="en", v="1.0"))
+
 if __name__ == "__main__":
     unittest.main()

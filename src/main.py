@@ -51,8 +51,10 @@ class AppRequestHandler(tornado.web.RequestHandler):
         A helper method that builds a full url out of an url base and parameters
         delivered as keyword arguments.
     """
+    @classmethod
     def buildRequestUrl(self, urlBase, **params):
-        return urlBase + "?" + urllib.urlencode(params)
+        if params: urlBase += "?"
+        return urlBase + urllib.urlencode(params)
 
     """
         A callback that's executed after http.fetch when an asynchronous request
