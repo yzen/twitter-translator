@@ -13,10 +13,9 @@ import uimodules
 from tornado.options import define, options
 """Define web application options"""
 define("port", default=8888)
-define("twitterUrl")
-define("googleTranslateUrl")
+define("twitterUrl", default="http://search.twitter.com/search.json")
+define("googleTranslateUrl", default="https://ajax.googleapis.com/ajax/services/language/translate")
 
-#TODO: TEST
 """Build an absolute path to a resource."""
 def getAbsolutePath(relPath):
     return os.path.join(os.path.dirname(__file__), relPath)
@@ -45,10 +44,9 @@ class WebApplication(tornado.web.Application):
 class AppRequestHandler(tornado.web.RequestHandler):
     def __init__(self, application, request, **kwargs):
         tornado.web.RequestHandler.__init__(self, application, request, **kwargs)
-        #TODO: TEST
         """lang field contains a short version of current user's locale."""
         self.lang = self.locale.code[0:2]
-    #TODO: Test
+
     """
         A helper method that builds a full url out of an url base and parameters
         delivered as keyword arguments.
@@ -56,7 +54,6 @@ class AppRequestHandler(tornado.web.RequestHandler):
     def buildRequestUrl(self, urlBase, **params):
         return urlBase + "?" + urllib.urlencode(params)
 
-    #TODO: Test
     """
         A callback that's executed after http.fetch when an asynchronous request
         handler is complete.
@@ -65,7 +62,6 @@ class AppRequestHandler(tornado.web.RequestHandler):
         """Override in subclass - a handle request callback when making async requests."""
         return None
 
-    #TODO: Test
     """
         handlerRequestCallback's wrapper that checks for reponse error and parses json 
         body.
