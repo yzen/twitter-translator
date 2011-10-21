@@ -66,11 +66,28 @@ class mainTest(unittest.TestCase):
         
 """Testing AppRequestHandler class from main.py"""
 class AppRequestHandlerTest(unittest.TestCase):
-    """getAbsolutePath from main.py that intelligently joins a number of path fragments"""
+    """test buildRequestUrl that builds url from base and query params."""
     def test_buildRequestUrl(self):
         self.assertEqual("some_url?q=query", AppRequestHandler.buildRequestUrl("some_url", q="query"))
         self.assertEqual("some_url", AppRequestHandler.buildRequestUrl("some_url"))
         self.assertEqual("some_url?q=test&lang=en&v=1.0", AppRequestHandler.buildRequestUrl("some_url", q="test", lang="en", v="1.0"))
+
+"""A mock up of the response object"""
+class responseMock(object):
+    def __init__(self, error):
+        self.error = error
+
+"""Testing AppRequestHandler class from main.py"""
+class AsyncHandlerTest(unittest.TestCase):
+    def setUp(self):
+        self.handler = AsyncHandler()
+        self.errorResponse = responseMock(True)
+
+    def test_AsyncHandlere(self):
+        with self.assertRaises(tornado.web.HTTPError):
+            self.handler.on_resonse(self.errorResponse)
+        self.assertIsNone(self.handler.handleRequestCallback("Test Data"))
+
 
 if __name__ == "__main__":
     unittest.main()

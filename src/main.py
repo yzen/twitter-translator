@@ -38,24 +38,10 @@ class WebApplication(tornado.web.Application):
         ], **settings)
 
 """
-    tornado.web.RequestHandler's subclass that helps to abstract some of the handler's
-    asynchronous functionality.
+    AsyncHandler class that abstracts common functionality for its request handler
+    subclasses that implement non-blocking handling of requests.
 """
-class AppRequestHandler(tornado.web.RequestHandler):
-    def __init__(self, application, request, **kwargs):
-        tornado.web.RequestHandler.__init__(self, application, request, **kwargs)
-        """lang field contains a short version of current user's locale."""
-        self.lang = self.locale.code[0:2]
-
-    """
-        A helper method that builds a full url out of an url base and parameters
-        delivered as keyword arguments.
-    """
-    @classmethod
-    def buildRequestUrl(self, urlBase, **params):
-        if params: urlBase += "?"
-        return urlBase + urllib.urlencode(params)
-
+class AsyncHandler(object):
     """
         A callback that's executed after http.fetch when an asynchronous request
         handler is complete.
@@ -72,6 +58,26 @@ class AppRequestHandler(tornado.web.RequestHandler):
         if response.error: raise tornado.web.HTTPError(500)
         data = tornado.escape.json_decode(response.body)
         self.handleRequestCallback(data)
+
+"""
+    tornado.web.RequestHandler's subclass that helps to abstract some of the handler's
+    asynchronous functionality.
+"""
+class AppRequestHandler(tornado.web.RequestHandler, AsyncHandler):
+    def __init__(self, application, request, **kwargs):
+        tornado.web.RequestHandler.__init__(self, application, request, **kwargs)
+        """lang field contains a short version of current user's locale."""
+        self.lang = self.locale.code[0:2]
+
+    """
+        A helper method that builds a full url out of an url base and parameters
+        delivered as keyword arguments.
+    """
+    @classmethod
+    def buildRequestUrl(self, urlBase, **params):
+        if params: urlBase += "?"
+        return urlBase + urllib.urlencode(params)
+
 """
     AppRequestHandler's subclass that handles GET requests to '/' url.
 """
