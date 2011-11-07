@@ -85,7 +85,7 @@ class AsyncHandlerTest(unittest.TestCase):
 
     def test_AsyncHandlere(self):
         with self.assertRaises(tornado.web.HTTPError):
-            self.handler.on_resonse(self.errorResponse)
+            self.handler.on_response(self.errorResponse)
         self.assertIsNone(self.handler.handleRequestCallback("Test Data"))
 
 
