@@ -2,6 +2,7 @@ Twitter Translate web app.
 ===
 
 This web app allows users to search for anything on Twitter. The app displays latest 20 tweets that match the search criteria. For every tweet that is not in user's native language there is an option to translate the tweet using Google Translate API.
+NOTE: As of December 2011 Google Translate API v1 will stop working so you would have to use v2 API that is not free.
 
 
 ### Dependencies
