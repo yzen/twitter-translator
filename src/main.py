@@ -54,7 +54,7 @@ class AsyncHandler(object):
         handlerRequestCallback's wrapper that checks for reponse error and parses json 
         body.
     """
-    def on_resonse(self, response):
+    def on_response(self, response):
         if response.error: raise tornado.web.HTTPError(500)
         data = tornado.escape.json_decode(response.body)
         self.handleRequestCallback(data)
@@ -100,7 +100,7 @@ class SearchHandler(AppRequestHandler):
         http = tornado.httpclient.AsyncHTTPClient()
         http.fetch(self.buildRequestUrl(options.twitterUrl,
             q=query["query"][0]),
-            callback=self.on_resonse)
+            callback=self.on_response)
 
     """Overridden handleRequestCallback that renders twitter search results."""
     def handleRequestCallback(self, data):
@@ -117,7 +117,7 @@ class TranslateHandler(AppRequestHandler):
         http = tornado.httpclient.AsyncHTTPClient()
         http.fetch(self.buildRequestUrl(options.googleTranslateUrl,
             v="1.0", q=query["text"][0], langpair=query["lang"][0] + "|" + self.lang),
-            callback=self.on_resonse,
+            callback=self.on_response,
             headers={"Referer": self.request.headers["Referer"]})
 
     """
